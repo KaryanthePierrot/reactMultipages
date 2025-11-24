@@ -1,11 +1,11 @@
-# Sample Snack app
+Este é o projeto Multipages do aluno Westes, desenvolvido para a matéria de Desenvolvimento Mobile, na Fatec Itaquera.
 
-Open the `App.js` file to start writing some code. You can preview the changes directly on your phone or tablet by scanning the **QR code** or use the iOS or Android emulators. When you're done, click **Save** and share the link!
+Ele foi desenvolvido usando React Native, utilizando do emulador android disponível através da plataforma Snack Expo ( https://expo.dev/ );
 
-When you're ready to see everything that Expo provides (or if you want to use your own editor) you can **Download** your project and use it with [expo cli](https://docs.expo.dev/get-started/installation/#expo-cli)).
+Para acesso à aplicação em seu ambiente de codificação, acesse o seguinte link ( https://snack.expo.dev/@karyanpierrot/wesmultipages ).
 
-All projects created in Snack are publicly available, so you can easily share the link to this project via link, or embed it on a web page with the `<>` button.
+Se for testá-lo localmente, é necessário rodar o comando no terminal [ npm install ] para instalar as dependencias.
 
-If you're having problems, you can tweet to us [@expo](https://twitter.com/expo) or ask in our [forums](https://forums.expo.dev/c/expo-dev-tools/61) or [Discord](https://chat.expo.dev/).
+IMPORTANTE: A aplicação não funciona adequadamente no emulador web pois utiliza banco de dados para Mobile.
+IMPORTANTE: A aplicação não pretende ser buildada para aplicativos, assim, não houveram testes dessa maneira, sendo necessária configuração prévia para essa modalidade
 
-Snack is Open Source. You can find the code on the [GitHub repo](https://github.com/expo/snack).
