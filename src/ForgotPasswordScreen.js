@@ -7,88 +7,32 @@ import {
   StyleSheet,
 } from 'react-native';
 
-import {
-  conn,
-  getUser,
-  userExiste,
-  createTableUsers,
-  createUser,
-} from '../database/bd';
+export default function ForgotPasswordScreen({ navigation }) {
+  const [email, setEmail] = useState('');
 
-export default function RegisterScreen({ navigation }) {
-  const [user, setUser] = useState('');
-  const [pass, setPass] = useState('');
-  const [confirmarpass, setConfirmarpass] = useState('');
-  const handleRegister = async () => {
-    if (!user || !pass || !confirmarpass) {
-      alert('Preencha todos os campos!');
+  const handleReset = () => {
+    if (!email) {
+      alert('Por favor, digite seu e-mail.');
       return;
     }
-
-    if (pass !== confirmarpass) {
-      alert('As passs não coincidem!');
-      return;
-    }
-
-    if (pass.length < 4) {
-      alert('A pass deve ter pelo menos 4 caracteres!');
-      return;
-    }
-
-    try {
-      await createTableUsers();
-
-      const db = await conn();
-      const usersExistentes = await db.getAllAsync(
-        'SELECT * FROM users WHERE user = ?',
-        user
-      );
-
-      if (usersExistentes.length > 0) {
-        alert('Este usuário já existe!');
-        return;
-      }
-
-      await createUser(user, pass);
-      alert('Conta criada com sucesso!');
-      navigation.navigate('index');
-    } catch (error) {
-      alert('Erro ao criar conta: ' + error.message);
-    }
+    alert(`Um link de redefinição foi enviado para: ${email} (é fake, ainda não funciona, cria um novo user)`);
+    navigation.navigate('Login');
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Criar Conta</Text>
-
+      <Text style={styles.title}>Recuperar Senha</Text>
       <TextInput
         style={styles.input}
-        placeholder="Usuário"
-        value={user}
-        onChangeText={setUser}
+        placeholder="Digite seu e-mail"
+        value={email}
+        onChangeText={setEmail}
       />
-
-      <TextInput
-        style={styles.input}
-        placeholder="pass"
-        secureTextEntry
-        value={pass}
-        onChangeText={setPass}
-      />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Confirmar pass"
-        secureTextEntry
-        value={confirmarpass}
-        onChangeText={setConfirmarpass}
-      />
-
-      <TouchableOpacity style={styles.button} onPress={handleRegister}>
-        <Text style={styles.buttonText}>Cadastrar</Text>
+      <TouchableOpacity style={styles.button} onPress={handleReset}>
+        <Text style={styles.buttonText}>Enviar link</Text>
       </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Index')}>
+      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
         <Text style={styles.link}>Voltar ao login</Text>
       </TouchableOpacity>
     </View>
@@ -100,22 +44,27 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f2f2f2',
+    backgroundColor: '#b1eaf1ff',
     padding: 20,
   },
   title: { fontSize: 26, fontWeight: 'bold', marginBottom: 30 },
   input: {
     width: '90%',
-    height: 45,
     backgroundColor: '#fff',
-    borderRadius: 8,
     paddingHorizontal: 10,
     marginBottom: 15,
-    borderWidth: 1,
     borderColor: '#ccc',
+    borderWidth: 2,
+    height: 50,
+    margin: 7,
+    padding: 5,
+    borderRadius: 20,
+    textAlign: 'center',
+    color: '#001d5cff',
+    fontSize: 18,
   },
   button: {
-    backgroundColor: '#f82b06ff',
+    backgroundColor: '#e9624bff',
     width: '90%',
     height: 45,
     borderRadius: 8,
@@ -123,5 +72,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   buttonText: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
-  link: { color: '#f82b06ff', marginTop: 15, fontWeight: 'bold' },
+  link: { color: '#e9624bff', marginTop: 15, fontWeight: 'bold', fontSize: 20 },
 });
